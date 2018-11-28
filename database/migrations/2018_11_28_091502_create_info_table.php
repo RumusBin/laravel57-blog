@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePriceBlocsTable extends Migration
+class CreateInfoTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreatePriceBlocsTable extends Migration
      */
     public function up()
     {
-        Schema::create('price_blocs', function (Blueprint $table) {
+        Schema::create('info', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
-            $table->text('content');
-            $table->float('price');
+            $table->string('phone_number');
+            $table->string('address');
+            $table->string('email');
+            $table->string('copyright');
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreatePriceBlocsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('price_blocs');
+        Schema::dropIfExists('info');
     }
 }

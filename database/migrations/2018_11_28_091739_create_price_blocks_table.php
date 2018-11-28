@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePageContentsTable extends Migration
+class CreatePriceBlocksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreatePageContentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('page_contents', function (Blueprint $table) {
+        Schema::create('price_blocks', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('copyright');
-            $table->string('footer_phone');
+            $table->string('title');
+            $table->text('body');
+            $table->float('price');
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreatePageContentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('page_contents');
+        Schema::dropIfExists('price_blocks');
     }
 }
