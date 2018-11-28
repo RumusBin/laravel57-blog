@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePageContentsTable extends Migration
+class CreateMainContentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreatePageContentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('page_contents', function (Blueprint $table) {
+        Schema::create('main_contents', function (Blueprint $table) {
             $table->increments('id');
             $table->string('copyright');
-            $table->string('footer_phone');
+            $table->string('phone_number');
+            $table->string('email');
+            $table->string('address');
             $table->timestamps();
         });
     }
