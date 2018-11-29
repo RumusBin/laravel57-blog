@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Info;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class InfoController extends Controller
 {
@@ -14,7 +15,8 @@ class InfoController extends Controller
      */
     public function index()
     {
-        //
+        $info = DB::table('infos')->latest()->first();
+        return view('info.index', compact('info'));
     }
 
     /**
@@ -30,17 +32,18 @@ class InfoController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
         $validated = request()->validate([
-            'phone_number' => 'regex:/(0)[0-9]{9}/',
-            'address' => 'required|max:250',
-            'email' => 'email'
+            'phone_number' => ['regex:/(0)[0-9]{9}/'],
+            'address' => ['required', 'max:250'],
+            'email' => ['required', 'email'],
+            'copyright' => ['max:150', 'min:5']
         ]);
-        return request()->all();
+        Info::create($validated);
+        return redirect('/info');
     }
 
     /**
@@ -62,7 +65,7 @@ class InfoController extends Controller
      */
     public function edit(Info $info)
     {
-        //
+        return view('info.edit', compact('info'));
     }
 
     /**
@@ -74,7 +77,14 @@ class InfoController extends Controller
      */
     public function update(Request $request, Info $info)
     {
-        //
+        $validated = request()->validate([
+            'phone_number' => ['regex:/(0)[0-9]{9}/'],
+            'address' => ['required', 'max:250'],
+            'email' => ['required', 'email'],
+            'copyright' => ['max:150', 'min:5']
+        ]);
+        $info->update($validated);
+        return redirect('/info');
     }
 
     /**
@@ -85,6 +95,7 @@ class InfoController extends Controller
      */
     public function destroy(Info $info)
     {
-        //
+        $info->delete();
+        return redirect('/info');
     }
 }
