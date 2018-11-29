@@ -14,18 +14,18 @@ class PagesController extends Controller
     public function advertising()
     {
 
-        return view('advertising');
+        return view('pages.advertising');
 
     }
 
     public function about()
     {
-        return view('about');
+        return view('pages.about');
     }
 
 
     public function contacts()
     {
-        return view('contacts');
+        return view('pages.contacts');
     }
 }

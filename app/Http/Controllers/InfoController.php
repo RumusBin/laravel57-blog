@@ -35,6 +35,11 @@ class InfoController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = request()->validate([
+            'phone_number' => 'regex:/(0)[0-9]{9}/',
+            'address' => 'required|max:250',
+            'email' => 'email'
+        ]);
         return request()->all();
     }
 
