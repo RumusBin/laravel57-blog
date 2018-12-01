@@ -14,7 +14,7 @@
                     <label class="label">Номер телефона</label>
                     <div class="control has-icons-left">
                         <input class="input"
-                               type="text" placeholder="Введите номер телефона в формате 0..."
+                               type="text"
                                name="phone_number"
                                value="{{$info->phone_number}}">
                         <span class="icon is-small is-left">
@@ -26,8 +26,7 @@
                     <label class="label">Адресс компании</label>
                     <div class="control has-icons-left">
                         <input class="input"
-                               type="text" placeholder="Введите адресс компании"
-                               name="address"
+                               type="text"  name="address"
                                value="{{$info->address}}">
                         <span class="icon is-small is-left">
                               <i class="fas fa-home"></i>
@@ -64,7 +63,7 @@
                         <button class="button is-link">Обновить</button>
                     </div>
                     <div class="control">
-                        <button  class="button is-text">Назад</button>
+                        <button  class="button is-text" href="{{route('info.index')}}">Назад</button>
                     </div>
                 </div>
             </form>

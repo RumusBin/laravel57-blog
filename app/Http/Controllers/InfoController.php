@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreMainInfo;
 use App\Info;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 
@@ -34,14 +33,14 @@ class InfoController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     * @var StoreMainInfo
+     * @param  StoreMainInfo
      *
      * @return \Illuminate\Http\Response
      */
     public function store(StoreMainInfo $request)
     {
         Info::create($request->validated());
-        return redirect('/info');
+        return redirect()->route('info.index');
     }
 
     /**
@@ -76,7 +75,7 @@ class InfoController extends Controller
     public function update(StoreMainInfo $request, Info $info)
     {
         $info->update($request->validated());
-        return redirect('/info');
+        return redirect()->route('info.index');
     }
 
     /**
@@ -92,6 +91,6 @@ class InfoController extends Controller
         } catch (\Exception $exception) {
             return new Response($exception->getMessage(), 400);
         }
-        return redirect('/info');
+        return redirect()->route('info.index');
     }
 }
