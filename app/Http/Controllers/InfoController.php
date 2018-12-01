@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreMainInfo;
 use App\Info;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 
 class InfoController extends Controller
@@ -32,18 +34,13 @@ class InfoController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     * @var StoreMainInfo
      *
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(StoreMainInfo $request)
     {
-        $validated = request()->validate([
-            'phone_number' => ['regex:/(0)[0-9]{9}/'],
-            'address' => ['required', 'max:250'],
-            'email' => ['required', 'email'],
-            'copyright' => ['max:150', 'min:5']
-        ]);
-        Info::create($validated);
+        Info::create($request->validated());
         return redirect('/info');
     }
 
@@ -64,7 +61,7 @@ class InfoController extends Controller
      * @param  \App\Info  $info
      * @return \Illuminate\Http\Response
      */
-    public function edit(Info $info)
+    public function edit( Info $info)
     {
         return view('info.edit', compact('info'));
     }
@@ -72,19 +69,13 @@ class InfoController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  StoreMainInfo  $request
      * @param  \App\Info  $info
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Info $info)
+    public function update(StoreMainInfo $request, Info $info)
     {
-        $validated = request()->validate([
-            'phone_number' => ['regex:/(0)[0-9]{9}/'],
-            'address' => ['required', 'max:250'],
-            'email' => ['required', 'email'],
-            'copyright' => ['max:150', 'min:5']
-        ]);
-        $info->update($validated);
+        $info->update($request->validated());
         return redirect('/info');
     }
 
@@ -96,7 +87,11 @@ class InfoController extends Controller
      */
     public function destroy(Info $info)
     {
-        $info->delete();
+        try {
+            $info->delete();
+        } catch (\Exception $exception) {
+            return new Response($exception->getMessage(), 400);
+        }
         return redirect('/info');
     }
 }
