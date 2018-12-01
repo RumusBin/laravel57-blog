@@ -16,6 +16,7 @@ class InfoController extends Controller
     public function index()
     {
         $info = DB::table('infos')->latest()->first();
+//        return view('info.index', compact('info'));
         return view('info.index', compact('info'));
     }
 

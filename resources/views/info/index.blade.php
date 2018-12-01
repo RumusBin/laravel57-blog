@@ -6,8 +6,9 @@
         <div class="container">
             <h1 class="title">Главная информация сайта</h1>
             @if(!$info)
-            <a class="button is-primary">Заполнить</a>
+            <a href="{{route('info.create')}}" class="button is-primary">Заполнить</a>
             @endif
+            @if($info)
             <table class="table">
                 <thead>
                 <tr>
@@ -27,14 +28,20 @@
                 </tfoot>
                 <tbody>
                 <tr>
+
                     <th>{{$info->phone_number}}</th>
                     <td>{{$info->email}}</td>
                     <td>{{$info->address}}</td>
                     <td>{{$info->copyright}}</td>
+
                 </tr>
                 </tbody>
             </table>
+
             <a class="button is-info" href="{{route('info.edit', $info->id)}}">Обновить</a>
+                @else()
+                <div>Нет информации!</div>
+            @endif
         </div>
     </section>
 

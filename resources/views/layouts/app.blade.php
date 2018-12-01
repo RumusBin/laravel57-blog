@@ -11,6 +11,6 @@
 </head>
 <body>
     @yield('content')
-    @yield('partials._footer')
+    @include('partials._footer')
 </body>
 </html>
