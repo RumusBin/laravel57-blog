@@ -9,25 +9,50 @@
 
                     @csrf
                     @method('PATCH')
+                    <div class="columns">
+                        <div class="column">
+                            <div class="field">
+                                <label class="label">Название новости</label>
+                                <div class="control has-icons-left">
+                                    <input class="input"
+                                           type="text"
+                                           name="title"
+                                           value="{{$post->title}}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="field">
+                                <label class="label">Дата новости</label>
+                                <div class="control">
+                                    <input class="input"
+                                           type="date"
+                                           name="date"
+                                           value="{{$post->date}}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="field">
+                                <label class="label">Категории</label>
+                                <div class="control">
+                                    <div class="select">
+                                        <select name="category_id">
+                                            @foreach($categories as $category)
+                                                <option
+                                                        value="{{$category->id}}"
+                                                        @if($post->category && $post->category->id == $category->id)
+                                                        selected
+                                                        @endif
+                                                >{{$category->title}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                    <div class="field">
-                        <label class="label">Название новости</label>
-                        <div class="control has-icons-left">
-                            <input class="input"
-                                   type="text"
-                                   name="title"
-                                   value="{{$post->title}}">
-                        </div>
-                    </div>
-                    <div class="field">
-                        <label class="label">Дата новости</label>
-                        <div class="control">
-                            <input class="input"
-                                   type="date"
-                                   name="date"
-                                   value="{{$post->date}}">
-                        </div>
-                    </div>
                     <div class="field">
                         <label class="label">Контент</label>
                         <div class="control has-icons-left">

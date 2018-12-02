@@ -9,7 +9,8 @@
                 <thead>
                 <tr>
                     <th><abbr title="Название категории">Название новости</abbr></th>
-                    <th><abbr title="Дата категории">Дата новости</abbr></th>
+                    <th><abbr title="Дата новости">Дата новости</abbr></th>
+                    <th><abbr title="Категория">Дата новости</abbr></th>
                     <th>
                         <abbr title="Действия">Действия</abbr>
                     </th>
@@ -21,6 +22,7 @@
                         <tr>
                             <th>{{$post->title}}</th>
                             <th>{{$post->date}}</th>
+                            <th>@if($post->category){{$post->category->title}}@endif</th>
                             <th>
                                 <a class="button is-info" href="{{route('posts.edit', $post->id)}}">
                                     Обновить

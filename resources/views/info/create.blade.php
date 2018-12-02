@@ -69,7 +69,7 @@
                 </form>
                 @if($errors->any())
                 <div class="notification is-danger">
-                    @foreach($errors as $error)
+                    @foreach($errors->all() as $error)
                     <button class="delete"></button>
                         <strong>Ooops!!</strong> {{$error}}
                     @endforeach

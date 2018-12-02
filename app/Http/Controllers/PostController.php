@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Http\Requests\StorePost;
 use App\Post;
 use Illuminate\Http\Request;
@@ -27,7 +28,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('post.create');
+        $categories = Category::all();
+        return view('post.create', compact('categories'));
     }
 
     /**
@@ -38,7 +40,6 @@ class PostController extends Controller
      */
     public function store(StorePost $request)
     {
-
         Post::create($request->validated());
 
         return redirect()->route('posts.index');
@@ -63,7 +64,8 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('post.edit', compact('post'));
+        $categories = Category::all();
+        return view('post.edit', compact('post', 'categories'));
     }
 
     /**
@@ -77,7 +79,7 @@ class PostController extends Controller
     {
         $post->update($request->validated());
 
-        return redirect()->route('post.index');
+        return redirect()->route('posts.index');
     }
 
     /**

@@ -26,7 +26,8 @@ class StorePost extends FormRequest
         return [
             'title' => ['required', 'max:200', 'min:4'],
             'content' => ['required', 'min:30'],
-            'date' => ['required', 'date']
+            'date' => ['required', 'date'],
+            'category_id' => ['nullable', 'numeric']
         ];
     }
 

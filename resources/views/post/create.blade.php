@@ -9,24 +9,45 @@
 
                     {{csrf_field()}}
 
-                    <div class="field">
-                        <label class="label">Название</label>
-                        <div class="control has-icons-left">
-                            <input class="input"
-                                   type="text" placeholder="Название новости"
-                                   name="title"
-                                   value="{{old('title')}}">
+                    <div class="columns">
+                        <div class="column">
+                            <div class="field">
+                                <label class="label">Название</label>
+                                <div class="control has-icons-left">
+                                    <input class="input"
+                                           type="text" placeholder="Название новости"
+                                           name="title"
+                                           value="{{old('title')}}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="field">
+                                <label class="label">Дата новости</label>
+                                <div class="control">
+                                    <input class="input"
+                                           type="date"
+                                           name="date"
+                                           value="{{old('date')}}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="field">
+                                <label class="label">Категории</label>
+                                <div class="control">
+                                    <div class="select">
+                                        <select name="category_id">
+                                            @foreach($categories as $category)
+                                            <option value="{{$category->id}}">{{$category->title}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="field">
-                        <label class="label">Дата новости</label>
-                        <div class="control">
-                            <input class="input"
-                                   type="date"
-                                   name="date"
-                                   value="{{old('date')}}">
-                        </div>
-                    </div>
+
                     <div class="field">
                         <label class="label">Контент</label>
                         <div class="control has-icons-left">
