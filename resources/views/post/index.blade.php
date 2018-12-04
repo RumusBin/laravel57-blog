@@ -10,7 +10,7 @@
                 <tr>
                     <th><abbr title="Название категории">Название новости</abbr></th>
                     <th><abbr title="Дата новости">Дата новости</abbr></th>
-                    <th><abbr title="Категория">Дата новости</abbr></th>
+                    <th><abbr title="Категория">Категория</abbr></th>
                     <th>
                         <abbr title="Действия">Действия</abbr>
                     </th>

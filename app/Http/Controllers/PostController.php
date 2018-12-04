@@ -7,6 +7,7 @@ use App\Http\Requests\StorePost;
 use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -40,8 +41,27 @@ class PostController extends Controller
      */
     public function store(StorePost $request)
     {
-        Post::create($request->validated());
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $request->validated();
+            $fileName = time() . '.' . $file->getClientOriginalExtension();
+            $destinationPath = public_path('/images');
+            $file->move($destinationPath, $fileName);
 
+        } else {
+            $fileName = 'no_image.png';
+        }
+        $post = new Post;
+        $post->title = $request['title'];
+        $post->content = $request['content'];
+        $post->date = $request['date'];
+        if ($request['category_id']) {
+            $post->category_id = $request['category_id'];
+        }
+        $post->image = $fileName;
+        $post->save();
+//        Post::create($request->validated());
+//
         return redirect()->route('posts.index');
     }
 
@@ -77,7 +97,25 @@ class PostController extends Controller
      */
     public function update(StorePost $request, Post $post)
     {
-        $post->update($request->validated());
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $fileName = time() . '.' . $file->getClientOriginalExtension();
+            $destinationPath = public_path('/images');
+            $file->move($destinationPath, $fileName);
+            if ($post->image !== 'no_image.png') {
+                Storage::delete(public_path('/images/') . $post->image);
+            }
+        } else {
+            $fileName = $post->image;
+        }
+        $post->title = $request['title'];
+        $post->content = $request['content'];
+        $post->date = $request['date'];
+        if ($request['category_id']) {
+            $post->category_id = $request['category_id'];
+        }
+        $post->image = $fileName;
+        $post->save();
 
         return redirect()->route('posts.index');
     }

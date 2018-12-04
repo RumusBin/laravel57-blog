@@ -27,7 +27,8 @@ class StorePost extends FormRequest
             'title' => ['required', 'max:200', 'min:4'],
             'content' => ['required', 'min:30'],
             'date' => ['required', 'date'],
-            'category_id' => ['nullable', 'numeric']
+            'category_id' => ['nullable', 'numeric'],
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,svg|max:3100',
         ];
     }
 
@@ -39,7 +40,10 @@ class StorePost extends FormRequest
             'title.min'  => 'Поле должно сожержать 4 сивола минимум',
             'content.required'  => 'Заполните содержание новости',
             'content.min'  => 'Поле должно сожержать 30 сиволов минимум',
-            'date.required'  => 'Заполните дату новости'
+            'date.required'  => 'Заполните дату новости',
+            'image.image' => 'Этот файл не похож на картинку',
+            'image.mimes' => 'Допустимые расширения: jpeg, png, jpg, svg',
+            'image.max' => 'Максимально допустимый размер файла 3 Mb',
         ];
     }
 }

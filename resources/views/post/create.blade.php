@@ -5,7 +5,7 @@
         <div class="container">
             <h1 class="title">Создание новости</h1>
             <div>
-                <form action="{{route('posts.store')}}" method="post">
+                <form action="{{route('posts.store')}}" method="post" enctype="multipart/form-data">
 
                     {{csrf_field()}}
 
@@ -33,6 +33,20 @@
                             </div>
                         </div>
                         <div class="column">
+                            <div class="file has-name is-boxed">
+                                <label class="file-label">
+                                    <input id="file" class="file-input" type="file" name="image">
+                                    <span class="file-cta">
+                                      <span class="file-icon">
+                                        <i class="fas fa-upload"></i>
+                                      </span>
+                                      <span class="file-label">Выберите картинку</span>
+                                    </span>
+                                    <span id="filename" class="file-name"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="column">
                             <div class="field">
                                 <label class="label">Категории</label>
                                 <div class="control">
@@ -47,7 +61,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="field">
                         <label class="label">Контент</label>
                         <div class="control has-icons-left">
@@ -63,17 +76,19 @@
                         </div>
                     </div>
                 </form>
-
-                @if($errors->any())
-                    <br>
-                    <div class="notification is-danger">
-                        @foreach($errors->all() as $error)
-                            <button class="delete"></button>
-                            <strong>Ooops!!</strong> {{$error}}
-                        @endforeach
-                    </div>
-                @endif
+                @include('partials._errors')
             </div>
         </div>
     </section>
+@endsection
+@section('scripts')
+    <script>
+        let file = document.getElementById("file");
+        file.onchange = function(){
+            if(file.files.length > 0)
+            {
+                document.getElementById('filename').innerHTML = file.files[0].name;
+            }
+        };
+    </script>
 @endsection
