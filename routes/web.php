@@ -15,6 +15,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('price-blocks', 'PriceBlockController');
 });
 
+Route::get('/admin', 'AdminController@index');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
