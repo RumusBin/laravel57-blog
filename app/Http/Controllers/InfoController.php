@@ -17,8 +17,7 @@ class InfoController extends Controller
     public function index()
     {
         $info = DB::table('info')->latest()->first();
-//        return view('info.index', compact('info'));
-        return view('info.index', compact('info'));
+        return view('admin.content.info.index', compact('info'));
     }
 
     /**
@@ -28,7 +27,7 @@ class InfoController extends Controller
      */
     public function create()
     {
-        return view('info.create');
+        return view('admin.content.info.create');
     }
 
     /**
@@ -62,7 +61,7 @@ class InfoController extends Controller
      */
     public function edit( Info $info)
     {
-        return view('info.edit', compact('info'));
+        return view('admin.content.info.edit', compact('info'));
     }
 
     /**
