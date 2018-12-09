@@ -40,16 +40,14 @@
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-files-o"></i>
-                    <span>Layout Options</span>
+                    <span>Управление пользователями</span>
                     <span class="pull-right-container">
               <span class="label label-primary pull-right">4</span>
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> Top Navigation</a></li>
-                    <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> Boxed</a></li>
-                    <li><a href="pages/layout/fixed.html"><i class="fa fa-circle-o"></i> Fixed</a></li>
-                    <li><a href="pages/layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
+                    <li><a href="pages/layout/top-nav.html"><i class="fa fa-user"></i>Пользователи</a></li>
+                    <li><a href="{{route('roles.index')}}"><i class="fa fa-user-circle-o"></i>Роли</a></li>
                 </ul>
             </li>
             <li>
