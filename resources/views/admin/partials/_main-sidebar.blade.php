@@ -46,7 +46,7 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="pages/layout/top-nav.html"><i class="fa fa-user"></i>Пользователи</a></li>
+                    <li><a href="{{route('users.index')}}"><i class="fa fa-user"></i>Пользователи</a></li>
                     <li><a href="{{route('roles.index')}}"><i class="fa fa-user-circle-o"></i>Роли</a></li>
                 </ul>
             </li>

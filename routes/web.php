@@ -15,14 +15,17 @@ Route::get('/contacts', 'PagesController@contacts')->name('contacts');
 //    Route::resource('price-blocks', 'PriceBlockController');
 //});
 
-Route::resource('roles','RoleController');
-Route::resource('users','UserController');
-Route::resource('categories', 'CategoryController');
-Route::resource('posts', 'PostController');
-Route::resource('info', 'InfoController');
-Route::resource('price-blocks', 'PriceBlockController');
+Route::group(['prefix' => 'admin'], function()
+{
+    Route::resource('roles','RoleController');
+    Route::resource('users','UserController');
+    Route::resource('categories', 'CategoryController');
+    Route::resource('posts', 'PostController');
+    Route::resource('info', 'InfoController');
+    Route::resource('price-blocks', 'PriceBlockController');
 
-Route::get('/admin', 'AdminController@index');
+    Route::get('/', 'AdminController@index');
+});
 
 Auth::routes();
 
