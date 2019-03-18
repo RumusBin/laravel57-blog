@@ -31,8 +31,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roles = Role::pluck('name','name')->all();
-        return view('users.create',compact('roles'));
+        $roles = Role::pluck('name','id')->all();
+        return view('admin.content.users.create',compact('roles'));
     }
 
 
@@ -41,6 +41,7 @@ class UserController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
+     * @throws
      */
     public function store(Request $request)
     {
@@ -81,17 +82,16 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         $user = User::find($id);
-        $roles = Role::pluck('name','name')->all();
-        $userRole = $user->roles->pluck('name','name')->all();
+        $roles = Role::pluck('name','id')->all();
+        $userRole = $user->roles->pluck('name','id')->all();
 
-
-        return view('users.edit',compact('user','roles','userRole'));
+        return view('admin.content.users.edit', compact("user", "roles", "userRole"));
     }
 
 
@@ -99,11 +99,13 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
+     * @throws
      */
     public function update(Request $request, $id)
     {
+        $user = User::find($id);
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email|unique:users,email,'.$id,
@@ -119,14 +121,8 @@ class UserController extends Controller
             $input = array_except($input,array('password'));
         }
 
-
-        $user = User::find($id);
         $user->update($input);
-        DB::table('model_has_roles')->where('model_id',$id)->delete();
-
-
-        $user->assignRole($request->input('roles'));
-
+        $user->syncRoles($request->input('roles'));
 
         return redirect()->route('users.index')
             ->with('success','User updated successfully');

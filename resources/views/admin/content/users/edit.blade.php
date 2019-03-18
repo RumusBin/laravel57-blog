@@ -12,7 +12,7 @@
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
-                <form role="form" action="{{route('users.update')}}" method="post">
+                <form role="form" action="{{route('users.update', $user)}}" method="post">
                     @csrf
                     @method("PATCH")
                     <div class="box-body">
@@ -23,7 +23,7 @@
                                    class="form-control"
                                    placeholder="Имя пользователя"
                                    name="name"
-                                   value="{{old('name')}}">
+                                   value="{{$user->name}}">
                         </div>
                         <div class="form-group {{$errors->has('email') ? 'has-error' : ''}}">
                             <label for="user_email">Email</label>
@@ -32,7 +32,7 @@
                                    class="form-control"
                                    placeholder="Enter адресс"
                                    name="email"
-                                   value="{{old('email')}}"
+                                   value="{{$user->email}}"
                             >
                         </div>
                         <div class="form-group {{$errors->has('password') ? 'has-error' : ''}}">
@@ -54,21 +54,11 @@
                                    value="{{old('confirm-password')}}"
                             >
                         </div>
-                        <div class="form-group {{$errors->has('confirm-password') ? 'has-error' : ''}}">
-                            <label for="confirm_password">Подтвердите пароль</label>
-                            <input type="password"
-                                   id="confirm_password"
-                                   class="form-control"
-                                   placeholder="Подтвердите пароль"
-                                   name="confirm-password"
-                                   value="{{old('confirm-password')}}"
-                            >
-                        </div>
                         <div class="form-group">
                             <label for="roles">Роли</label>
                             <select multiple class="form-control" id="roles" name="roles[]">
-                                @foreach($roles as $role)
-                                    <option value="{{$role->id}}">{{$role->name}}</option>
+                                @foreach($roles as $id => $roleName)
+                                    <option value="{{$id}}">{{$roleName}}</option>
                                 @endforeach
                             </select>
                         </div>

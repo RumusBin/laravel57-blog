@@ -54,21 +54,11 @@
                                    value="{{old('confirm-password')}}"
                             >
                         </div>
-                        <div class="form-group {{$errors->has('confirm-password') ? 'has-error' : ''}}">
-                            <label for="confirm_password">Подтвердите пароль</label>
-                            <input type="password"
-                                   id="confirm_password"
-                                   class="form-control"
-                                   placeholder="Подтвердите пароль"
-                                   name="confirm-password"
-                                   value="{{old('confirm-password')}}"
-                            >
-                        </div>
                         <div class="form-group">
                             <label for="roles">Роли</label>
                             <select multiple class="form-control" id="roles" name="roles[]">
-                                @foreach($roles as $role)
-                                <option value="{{$role->id}}">{{$role->name}}</option>
+                                @foreach($roles as $id => $roleName)
+                                    <option value="{{$id}}">{{$roleName}}</option>
                                 @endforeach
                             </select>
                         </div>
