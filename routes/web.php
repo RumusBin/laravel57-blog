@@ -15,7 +15,7 @@ Route::get('/contacts', 'PagesController@contacts')->name('contacts');
 //    Route::resource('price-blocks', 'PriceBlockController');
 //});
 
-Route::group(['prefix' => 'admin'], function()
+Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function()
 {
     Route::resource('roles','RoleController');
     Route::resource('users','UserController');
