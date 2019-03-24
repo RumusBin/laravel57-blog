@@ -7,6 +7,7 @@ use App\Http\Requests\StorePost;
 use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
@@ -16,10 +17,11 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Post::all();
-        return view('post.index', compact('posts'));
+        $posts = Post::orderBy('id','DESC')->paginate(5);
+        return view('admin.content.posts.index', compact('posts'))
+            ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -30,7 +32,7 @@ class PostController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('post.create', compact('categories'));
+        return view('admin.content.posts.create', compact('categories'));
     }
 
     /**
@@ -41,13 +43,12 @@ class PostController extends Controller
      */
     public function store(StorePost $request)
     {
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
+        if ($request->hasFile('postImage')) {
+            $file = $request->file('postImage');
             $request->validated();
             $fileName = time() . '.' . $file->getClientOriginalExtension();
             $destinationPath = public_path('/images');
             $file->move($destinationPath, $fileName);
-
         } else {
             $fileName = 'no_image.png';
         }
@@ -58,10 +59,10 @@ class PostController extends Controller
         if ($request['category_id']) {
             $post->category_id = $request['category_id'];
         }
-        $post->image = $fileName;
+        $post->user_id = Auth::user()->id;
+        $post->postImage = $fileName;
         $post->save();
-//        Post::create($request->validated());
-//
+
         return redirect()->route('posts.index');
     }
 
@@ -85,7 +86,7 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $categories = Category::all();
-        return view('post.edit', compact('post', 'categories'));
+        return view('admin.content.posts.edit', compact('post', 'categories'));
     }
 
     /**

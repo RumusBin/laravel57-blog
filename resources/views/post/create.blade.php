@@ -6,9 +6,7 @@
             <h1 class="title">Создание новости</h1>
             <div>
                 <form action="{{route('posts.store')}}" method="post" enctype="multipart/form-data">
-
                     {{csrf_field()}}
-
                     <div class="columns">
                         <div class="column">
                             <div class="field">

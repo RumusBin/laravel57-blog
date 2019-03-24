@@ -11,14 +11,15 @@ class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $categories = Category::all();
+        $categories = Category::orderBy('id','DESC')->paginate(5);
 
-        return view('category.index', compact('categories'));
+        return view('admin.content.categories.index', compact('categories'))
+            ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -28,7 +29,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('category.create');
+        return view('admin.content.categories.create');
     }
 
     /**

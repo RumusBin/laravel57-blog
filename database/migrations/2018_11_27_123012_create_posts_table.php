@@ -17,7 +17,7 @@ class CreatePostsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->text('content');
-            $table->text('image');
+            $table->text('postImage');
             $table->date('date');
             $table->unsignedInteger('category_id')->nullable();
             $table->unsignedInteger('user_id')->nullable();
