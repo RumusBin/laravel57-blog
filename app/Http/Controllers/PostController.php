@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Events\PostCreated;
 use App\Http\Requests\StorePost;
 use App\Post;
 use Illuminate\Http\Request;
@@ -62,6 +63,8 @@ class PostController extends Controller
         $post->user_id = Auth::user()->id;
         $post->postImage = $fileName;
         $post->save();
+
+        event(new PostCreated($post));
 
         return redirect()->route('posts.index');
     }
