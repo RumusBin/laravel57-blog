@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Post;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -11,14 +12,17 @@ class PostCreated extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $post;
+
     /**
      * Create a new message instance.
      *
+     * @param Post $post
      * @return void
      */
-    public function __construct()
+    public function __construct(Post $post)
     {
-        //
+        $this->post = $post;
     }
 
     /**
@@ -28,6 +32,6 @@ class PostCreated extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this->view('emails.post_created');
     }
 }

@@ -5,6 +5,7 @@ namespace App\Listeners;
 use App\Events\PostCreated;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Support\Facades\Mail;
 
 class SendPostCreateNotification
 {
@@ -26,6 +27,7 @@ class SendPostCreateNotification
      */
     public function handle(PostCreated $event)
     {
-        dd($event->post->title);
+        $post = $event->post;
+        Mail::to('temp@mail.com')->send(new \App\Mail\PostCreated($post));
     }
 }
