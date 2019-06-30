@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Info;
-use App\Post;
+use App\Models\Info;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class PagesController extends Controller
@@ -11,10 +11,9 @@ class PagesController extends Controller
     public function main()
     {
         $content = [];
-        $content['last_posts'] = Post::orderBy('created_at', 'desc')->limit(6)->get();
-        $content['info'] = Info::all();
+        $lastPosts = Post::orderBy('created_at', 'desc')->with('category')->limit(6)->get();
 
-        return view('pages.main', compact('content'));
+        return view('pages.main', compact('lastPosts'));
     }
 
     public function advertising()

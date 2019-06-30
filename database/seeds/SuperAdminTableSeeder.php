@@ -11,7 +11,7 @@ class SuperAdminTableSeeder extends Seeder
      */
     public function run()
     {
-        $admin = factory(App\User::class)->create([
+        $admin = factory(App\Models\User::class)->create([
             'name' => 'admin',
             'email' => 'admin@mail.com',
             'email_verified_at' => now(),

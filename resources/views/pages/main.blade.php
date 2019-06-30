@@ -1,45 +1,37 @@
 @extends('layouts.app')
 @section('title', 'Welcome to my blog')
 @section('content')
+    <!-- Page Content -->
     <div class="container">
-        <section class="hero is-info is-medium is-bold">
-            <div class="hero-body">
-                <div class="container has-text-centered">
-                    <h1 class="title">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        <br>sed eiusmod tempor incididunt ut labore et dolore magna aliqua</h1>
-                </div>
-            </div>
-        </section>
-        <div class="section">
-            <div class="row columns is-multiline">
-                @foreach($content['last_posts'] as $last_post)
-                <div class="column is-one-third">
-                    <div class="card large round">
-                        <div class="card-image">
-                            <figure class="image">
-                                <img src="/images/{{$last_post->postImage}}" alt="">
-                            </figure>
+
+        <!-- Jumbotron Header -->
+        <header class="jumbotron my-4">
+            <h1 class="display-3">A Warm Welcome!</h1>
+            <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, ipsam, eligendi, in quo sunt possimus non incidunt odit vero aliquid similique quaerat nam nobis illo aspernatur vitae fugiat numquam repellat.</p>
+            <a href="#" class="btn btn-primary btn-lg">Call to action!</a>
+        </header>
+
+        <!-- Page Features -->
+        <div class="row text-center">
+            @foreach($lastPosts as $post)
+{{--                {{dd($post)}}--}}
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card h-100">
+                        <img class="card-img-top" src="/images/{{$post->postImage}}" alt="">
+                        <div class="card-body">
+                            <h4 class="card-title">{{$post->title}}</h4>
+                            <p class="card-text">{{$post->content}}</p>
                         </div>
-                        <div class="card-content">
-                            <div class="media">
-                                <div class="media-left">
-                                    {{--<img src="" alt="img">--}}
-                                </div>
-                                <div class="media-content">
-                                    <p class="title is-4 no-padding">
-                                        {{$last_post->title}}
-                                    </p>
-                                    <div class="content">
-                                        {{$last_post->content}}
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="card-footer">
+                            <a href="#" class="btn btn-primary">Find Out More!</a>
                         </div>
                     </div>
                 </div>
-                @endforeach
-            </div>
+            @endforeach
         </div>
+        <!-- /.row -->
+
     </div>
+    <!-- /.container -->
 @endsection
 

@@ -12,7 +12,7 @@
 |
 */
 
-$factory->define(App\User::class, function () {
+$factory->define(App\Models\User::class, function () {
     return [
         'name' => 'admin',
         'email' => 'admin@mail.com',

@@ -6,8 +6,9 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>@yield('title', 'Welcome')</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link href="{{asset('css/heroic-features.css')}}" rel="stylesheet">
 </head>
 <body>
 <!-- Right Side Of Navbar -->
@@ -53,78 +54,13 @@
             {{--</li>--}}
             {{--@endguest--}}
     {{--</ul>--}}
-<!-- START NAV -->
-    <nav class="navbar">
-        <div class="container">
-            <div class="navbar-brand">
-                <a class="navbar-item" href="../">
-                    <img src="../images/bulma.png" alt="Logo">
-                </a>
-                <span class="navbar-burger burger" data-target="navbarMenu">
-                            <span></span>
-                    <span></span>
-                    <span></span>
-                    </span>
-            </div>
-            <div id="navbarMenu" class="navbar-menu">
-                <div class="navbar-end">
-                    <a class="navbar-item is-active" href="{{route('main')}}">
-                        Home
-                    </a>
-                    {{--<a class="navbar-item" href="{{route('')}}">--}}
-                        {{--Blog--}}
-                    {{--</a>--}}
-                    <a class="navbar-item" href="{{route('advertising')}}">
-                        Advertising
-                    </a>
-                    <a class="navbar-item">
-                        Team
-                    </a>
-                    <a class="navbar-item">
-                        Archives
-                    </a>
-                    <a class="navbar-item">
-                        Help
-                    </a>
-                    @guest
-                        <a class="navbar-item" href="{{ route('login') }}">{{ __('Login') }}</a>
-                        <a class="navbar-item" href="{{ route('register') }}">{{ __('Register') }}</a>
-                    @else
-                        <div class="navbar-item has-dropdown is-hoverable">
-                        <a class="navbar-link">
-                            Account
-                        </a>
-                        <div class="navbar-dropdown">
-                            <a class="navbar-item">
-                                Dashboard
-                            </a>
-                            <a class="navbar-item">
-                                Profile
-                            </a>
-                            <a class="navbar-item">
-                                Settings
-                            </a>
-                            <hr class="navbar-divider">
-                            <div class="navbar-item">
-                                <a href="{{ route('logout') }}"
-                                onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
-                                </a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    @endguest
-                </div>
-            </div>
-        </div>
-    </nav>
-<!-- END NAV -->
+@include('partials._navbar')
     @yield('content')
     @include('partials._footer')
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     @yield('scripts')
+
 </body>
 </html>
